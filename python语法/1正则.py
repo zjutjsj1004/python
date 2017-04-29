@@ -55,4 +55,14 @@ else:
 items = re.findall(pattern,test)
 for item in items:
         print item
-        
+
+test = "<a href=\"/article/118941806\" target=\"_blank\" class=\'contentHerf\' ><div class=\"content\"><span>神一般的巧合<br/>一个11朋友11，关系很好，就是那种你一张嘴他就知道你要说啥，好久没联系了，那天跟他聊天，然后他说要不交换qq干和密码玩，我说可以，我的密码是前面几个字母，后面是520，没想到他的秘码是前面是几个字母，后面是1314，突然心里面真的有一种感觉，想要跟他一辈子在一起的的感觉，却迫于某些原因却只能说是真的好巧，心里面那些波涛汹涌的话到嘴边又咽下去。不知道他有没有玩糗百，会不会看见</span></div></a>"
+pattern = re.compile('(<br/>)')
+test = pattern.sub('', test)
+if sys.version_info < (3, 4):  #python 判断 :https://segmentfault.com/q/1010000000127878
+        pattern = re.compile('a href="/article/118941806" target="_blank" class=\'contentHerf\' ><div class="content"><span>(.*[\x80-\xff]+)')
+else:
+        pattern = re.compile('a href="/article/118941806" target="_blank" class=\'contentHerf\' ><div class="content"><span>(.*[\u4e00-\u9fa5]+)')
+items = re.findall(pattern, test)
+for item in items:
+        print item
