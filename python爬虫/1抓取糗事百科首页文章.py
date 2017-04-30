@@ -15,12 +15,26 @@ headers = { 'User-Agent' : user_agent }
 try:
     request = urllib2.Request(url, headers=headers)
     response = urllib2.urlopen(request)
-    data = response.read()
-    data = data.decode('UTF-8')
-    data = data.encode(type)
-    print data
+    #data = response.read()
+    #data = data.decode('UTF-8')
+    #data = data.encode(type)
+    #print data
 
-
+    content = response.read().decode('UTF-8').encode(type)
+    print content
+    #if sys.version_info < (3, 4):  #python 判断 :https://segmentfault.com/q/1010000000127878
+        #pattern = re.compile('<div class=\"article block untagged mb15\" .*([\x80-\xff]+)')
+    #else:
+        #pattern = re.compile('<div class=\"article block untagged mb15\" .*([\u4e00-\u9fa5]+)')
+    
+    pattern = re.compile('<span>(.*?)</span>',re.S)  # re.S(全拼：DOTALL): 点任意匹配模式，改变'.'的行为
+    print '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!findall start'
+    items = re.findall(pattern,content)
+    print '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!findall end'
+    for item in items:
+        #pattern = re.compile('(<br/>)')
+        #item = pattern.sub('', item)
+        print item
 except urllib2.URLError, e:
     if hasattr(e, "code"):
         print e.code
