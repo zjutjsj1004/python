@@ -1,6 +1,6 @@
 from scrapy.spiders import CrawlSpider, Rule
-from wikiSpider.items import Article
-from scrapy.contrib.linkextractors.sgml import SgmlLinkExtractor
+from wikiSpider.items import WikispiderItem
+from scrapy.linkextractors import LinkExtractor
 from scrapy import log
 
 class ArticleSpider(CrawlSpider):
@@ -9,11 +9,11 @@ class ArticleSpider(CrawlSpider):
     allowed_domains = ["en.wikipedia.org"]
     start_urls = ["http://en.wikipedia.org/wiki/Python_%28programming_language%29"]
     rules = [
-        Rule(SgmlLinkExtractor(allow=('(/wiki/)((?!:).)*$'),), callback="parse_item", follow=True)
+        Rule(LinkExtractor(allow=('(/wiki/)((?!:).)*$'),), callback="parse_item", follow=True)
     ]
 
     def parse_item(self, response):
-        item = Article()
+        item = WikispiderItem()
         title = response.xpath('//h1/text()')[0].extract()
         print("Title is: "+title)
         item['title'] = title
