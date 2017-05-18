@@ -5,8 +5,8 @@ from scrapy import log
 
 class ArticleSpider(CrawlSpider):
     #log.start(logfile='log.txt', loglevel=log.CRITICAL)
-    name="article"
-    allowed_domains = ["en.wikipedia.org"]
+    name="article"  #name 就是这个spider 的 name
+    allowed_domains = ["en.wikipedia.org"] #allowed_domains这个是 spider要求设置的一个变量,表示允许爬虫爬的网站
     start_urls = ["http://en.wikipedia.org/wiki/Python_%28programming_language%29"]
     rules = [
         Rule(LinkExtractor(allow=('(/wiki/)((?!:).)*$'),), callback="parse_item", follow=True)
