@@ -12,8 +12,10 @@ html_doc = """
 and they lived at the bottom of a well.</p>
 
 <p class="story">...</p>
+</body>
+</html>
 """
 
-soup = BeautifulSoup(html_doc)
+soup = BeautifulSoup(html_doc,  "html.parser")
 
 print(soup.prettify())
