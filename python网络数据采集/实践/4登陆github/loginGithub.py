@@ -1,7 +1,5 @@
 # coding:utf-8
-
-
-
+#登陆参考：https://segmentfault.com/a/1190000005895018
 import requests
 from bs4 import BeautifulSoup
 
@@ -24,8 +22,8 @@ headers = {
 formData = {
     'commit': 'Sign+in',
     'utf8': "✓",
-    "login": "XXXXXXXX",
-    "password": "XXXXXXX",
+    "login": "XXXXXX",
+    "password": "XXXXXX",
 
 }
 s = requests.Session()
@@ -52,3 +50,15 @@ print (RESULT.cookies)
 
 with open('bitbucket.html', 'wb') as fp:
     fp.write(content)
+
+print ("```````````````````````````")
+#http://blog.csdn.net/boomhankers/article/details/53931614
+ss = s.get("https://github.com/phodal", headers=headers)  #注意这里加不加headers=headers效果相同
+print (ss.text)
+soupPhodal = BeautifulSoup(ss.text, "html.parser")
+print ("--------------------------")
+print (soupPhodal.find_all('a')) #找到所有的a标签以及内容
+print ("-----------打印出邮箱对应标签所有内容---------------")
+print (soupPhodal.find('a', {"class":'u-email'}))
+print ("------------打印出邮箱--------------")
+print (soupPhodal.find('a', {"class":'u-email'}).get_text()) #打印出邮箱
