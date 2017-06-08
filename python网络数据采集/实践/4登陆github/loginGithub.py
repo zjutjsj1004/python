@@ -32,6 +32,7 @@ RESULT = s.get(LoginUrl_GET, headers=headers)
 
 content = RESULT.content
 
+#注意需要进行二级制读写，不然报错：UnicodeDecodeError 'gbk' codec can't decode byte 0x9d in position 1270
 with open('login.html', 'wb') as fp:
     fp.write(content)
 html = open('login.html', 'rb')
