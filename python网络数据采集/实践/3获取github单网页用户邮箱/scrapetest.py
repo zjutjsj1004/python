@@ -1,50 +1,70 @@
+# -*- coding = utf-8 -*-
 #获取https://github.com/phodal 地址的Email:h@phodal.com
-#注意点:
-#1、我们在网页看到的邮箱，看源码以后发现是UNICODE编码格式
-#2、Email格式
-'''
-    body
-      DIV
-      DIV
-      DIV
-      DIV role="main"
-        DIV id="js-pjax-container"
-          DIV class="container-lg clearfix px-3 mt-4"
-           DIV class="col-3 float-left pr-3"
-            <ul> class="vcard-details border-top border-gray-light py-3"
-              <li>
-              <li>
-              <li>
-                <a>
-'''
-from urllib.request import urlopen
+# coding:utf-8
+#登陆参考：https://segmentfault.com/a/1190000005895018
+import requests
 from bs4 import BeautifulSoup
-import re
-html = urlopen("https://github.com/phodal")
-bsObj = BeautifulSoup(html.read(), "html.parser")#
-#bsObj = BeautifulSoup(html.read())
-'''
-不加"html.parser"会存在警告:UserWarning: No parser was explicitly specified, so I'm using the bes
-t available HTML parser for this system ("html.parser"). This usually isn't a problem, but if you run this code on anoth
-er system, or in a different virtual environment, it may use a different parser and behave differently.
 
-The code that caused this warning is on line 4 of the file .\scrapetest.py. To get rid of this warning, change code that
- looks like this:
+USERNAME = 'FizLBQ'
+PWD = 'Ll139196'
 
- BeautifulSoup(YOUR_MARKUP})
+LoginUrl_GET = 'https://github.com/login'
+LoginUrl = 'https://github.com/session'
 
-to this:
+headers = {
+    'Host': 'github.com',
+    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:47.0) Gecko/20100101 Firefox/47.0',
+    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+    'Accept-Language': 'en-US,en;q=0.5',
+    'Accept-Encoding': 'gzip, deflate, br',
+    'Referer': 'https://github.com',
+    'Connection': 'keep-alive',
+}
 
- BeautifulSoup(YOUR_MARKUP, "html.parser")
+formData = {
+    'commit': 'Sign+in',
+    'utf8': "✓",
+    "login": "XXXXXX",
+    "password": "XXXXXX",
 
-  markup_type=markup_type))
-  '''
+}
+s = requests.Session()
+RESULT = s.get(LoginUrl_GET, headers=headers)
 
 
-parse = bsObj.findAll(href='h@phodal.com')
-##print (bsObj)
-#parse = bsObj.findAll(re.compile('^svg'), attrs={"itemprop":"email"})
+content = RESULT.content
 
-print (parse)
+#注意需要进行二级制读写，不然报错：UnicodeDecodeError 'gbk' codec can't decode byte 0x9d in position 1270
+with open('login.html', 'wb') as fp:
+    fp.write(content)
+html = open('login.html', 'rb')
+soup = BeautifulSoup(html, "html.parser")
+token = soup.find('input', {'name': 'authenticity_token'})['value']
+formData['authenticity_token'] = token
+
+# RESULT = s.post(LoginUrl, headers=headers, data=formData,)
+RESULT = s.post(LoginUrl, data=formData,)
+
+content=RESULT.content
+print (RESULT.url)
+
+print (RESULT.status_code)
+print (RESULT.cookies)
+
+with open('bitbucket.html', 'wb') as fp:
+    fp.write(content)
+
+print ("```````````````````````````")
+#http://blog.csdn.net/boomhankers/article/details/53931614
+ss = s.get("https://github.com/phodal", headers=headers)  #注意这里加不加headers=headers效果相同
+soupPhodal = BeautifulSoup(ss.text, "html.parser")
+print ("--------------------------")
+print (soupPhodal.find_all('a')) #找到所有的a标签以及内容
+print ("-----------打印出邮箱对应标签所有内容---------------")
+print (soupPhodal.find('a', {"class":'u-email'}))
+print ("------------打印出邮箱--------------")
+print (soupPhodal.find('a', {"class":'u-email'}).get_text()) #打印出邮箱
+
+
 
 
