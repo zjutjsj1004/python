@@ -3,3 +3,8 @@ logging.basicConfig(filename = "test.log", level = logging.DEBUG)#需要指定fi
 
 
 logging.exception("11111111")
+
+
+import os
+print (os.name)
+print(os.path.abspath('.'))
