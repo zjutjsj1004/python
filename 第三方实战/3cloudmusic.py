@@ -1,5 +1,7 @@
-#网易云音乐评论爬取:https://www.cnblogs.com/lyrichu/p/6635798.html
 #!/usr/bin/env python2.7
+#迄今为止最好用的网易云音乐 API:https://www.v2ex.com/amp/t/354919
+#https://binaryify.github.io/NeteaseCloudMusicApi/#/?id=neteasecloudmusicapi
+#https://github.com/Binaryify/NeteaseCloudMusicApi
 # -*- coding: utf-8 -*-
 # @Time   : 2017/3/28 8:46
 # @Author : Lyrichu
