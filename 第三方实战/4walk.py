@@ -1,27 +1,38 @@
 #conding=utf8  
 import os 
 import shutil
+import time
+import stat
+
 def fun_formatDirPath(dirPath):
-    return dirPath[::-1]
+    return dirPath
+    #return dirPath[::-1]
 
 def fun_formatFileName(fileName):
-    return fileName[::-1]
+    return fileName
+    #return fileName[::-1]
 
-def del_file(filepath):
+def rm_read_only(fn, tmp, info):
+    if os.path.isfile(tmp):
+         os.chmod(tmp, stat.S_IWRITE)
+         os.remove(tmp)
+    elif os.path.isdir(tmp):
+        os.chmod(tmp, stat.S_IWRITE)
+        shutil.rmtree(tmp, onerror=rm_read_only)
+
+def clear_dir(filepath):
     """
-    删除某一目录下的所有文件或文件夹
+    清空某一目录下的所有文件或文件夹
     :param filepath: 路径
     :return:
     """
-    del_list = os.listdir(filepath)
-    for f in del_list:
-        file_path = os.path.join(filepath, f)
-        if os.path.isfile(file_path):
-            os.remove(file_path)
-        elif os.path.isdir(file_path):
-            shutil.rmtree(file_path)
+    if os.path.isdir(filepath):
+        shutil.rmtree(filepath, onerror=rm_read_only)
+    else:
+        print("文件夹不存在,无需删除")
 
-
+    if not os.path.exists(filepath):
+        os.makedirs(filepath)
 
 def getNewDir(oldDir):
     newDir = ""
@@ -47,36 +58,71 @@ def genNewDir(oldDir):
     gDict[oldDir] = newDir 
     return newDir
 
+print("============开始运行============")
+startTime = time.clock()
 gDict = {}
 gDictFile = {}
 #currPath="C:\\Users\\cq\\Desktop\\slot\\teen_an_Facebook-armeabi-release\\assets\\teen"
-currPath="C:\\Users\\cq\\Desktop\\a"
+currPath="E:\\Gitlab\\teen"
+#currPath="C:\\Users\\cq\\Desktop\\a"
+
+EXCLUDEDIRLIST=[".git", ".vscode"]
+EXCULUEFILELIST=["Node.csb"]
+
 pathinfo=os.path.split(currPath)
 genPath = os.path.join(pathinfo[0], pathinfo[1]+"Gen")
 gDict[currPath] = genPath
 print("curr", gDict[currPath])
-del_file(genPath)
+clear_dir(genPath)
 
-print("==========startDir==============")
+print("==========文件夹扫描和生成新文件夹==============")
 g = os.walk(currPath) #walk不包括currPath下面的文件
 for dirpath,dirnames,filenames in g:
-    print(dirpath)
-    for dirname in dirnames:
-        print(os.path.join(dirpath,dirname), " ---->", genNewDir(os.path.join(dirpath,dirname)))
-    print("=================================")
+    bContinue = True
+    print(dirpath, type(EXCLUDEDIRLIST))
+    for key in EXCLUDEDIRLIST:
+        if dirpath.lower().find(key.lower()) != -1:
+            bContinue = False
+            break
 
+    if bContinue:
+        for dirname in dirnames:
+            if dirname.lower() not in EXCLUDEDIRLIST:
+                print(os.path.join(dirpath,dirname), " ---->", genNewDir(os.path.join(dirpath,dirname)))
+        
 g = os.walk(currPath) #walk不包括currPath下面的文件
-print("==========startFile==============")
+print("==========文件扫描和生成新文件==============")
 for dirpath,dirnames,filenames in g:
-    for filename in filenames:
-        filePrefix = filename.split('.')[0]
-        fileSuffix = filename.split('.')[1]
-        fileFullPathBefore = os.path.join(dirpath,filename)
-        fileFullPathAfter = os.path.join(gDict[dirpath],  fun_formatFileName(filePrefix) + "." +fileSuffix)
-        print(fileFullPathBefore, " ---> ", fileFullPathAfter)
-        shutil.copy(fileFullPathBefore, fileFullPathAfter)
-        gDictFile[fileFullPathBefore] = fileFullPathAfter
-        #os.renames(os.path.join(dirpath,filename), os.path.join(dirpath,  formatDirName + "." +fileSuffix))
+    bContinue = True
+    for key in EXCLUDEDIRLIST:
+        if dirpath.lower().find(key.lower()) != -1:
+            bContinue = False
+            break
+    if bContinue:
+        for filename in filenames:
+            if filename not in EXCULUEFILELIST:
+                #考虑文件是否会存在文件后缀
+                splitFilename = filename.split('.')
+                splitFilenameLen = len(splitFilename)
+                fileFullPathBefore = os.path.join(dirpath,filename)
+                fileFullPathAfter = os.path.join(gDict[dirpath], filename)
+                if splitFilenameLen == 0:
+                    fileFullPathAfter = os.path.join(gDict[dirpath], filename)
+                elif splitFilenameLen == 1:
+                    fileFullPathAfter = os.path.join(gDict[dirpath], fun_formatFileName(filename.split('.')[0]))
+                elif splitFilenameLen == 2:
+                    filePrefix = filename.split('.')[0]
+                    fileSuffix = filename.split('.')[1]
+                    fileFullPathAfter = os.path.join(gDict[dirpath],  fun_formatFileName(filePrefix) + "." +fileSuffix)
+                else:
+                    fileFullPathAfter = os.path.join(gDict[dirpath], filename)
+                print(fileFullPathBefore, " ---> ", fileFullPathAfter)
+                if os.path.exists(fileFullPathAfter):
+                    print("文件夹不存在")
+                    continue
+                shutil.copy(fileFullPathBefore, fileFullPathAfter)
+                gDictFile[fileFullPathBefore] = fileFullPathAfter
+                #os.renames(os.path.join(dirpath,filename), os.path.join(dirpath,  formatDirName + "." +fileSuffix))
 
 print("==========gDict==============")
 f=open(os.path.join(genPath, 'map.txt'), "w",encoding="utf-8")
@@ -86,5 +132,7 @@ print("filename:", f.name)
 for key, value in gDictFile.items():
     f.writelines([key.replace("\\", "/"), ",", value.replace("\\", "/"), "\n"])
     print(key, "--->", value)
-    os.system('F:\\gocpplua\\awesome-cpp\\CodeSegment\\Debug\\CodeSegment' + " 11111" + " 22222")
+    #os.system('F:\\gocpplua\\awesome-cpp\\CodeSegment\\Debug\\CodeSegment' + " 11111" + " 22222")
 f.close()
+
+print("运行结束!! 耗时统计:", str(time.clock() - startTime))
