@@ -5,12 +5,12 @@ import time
 import stat
 
 def fun_formatDirPath(dirPath):
-    return dirPath
-    #return dirPath[::-1]
+    #return dirPath
+    return dirPath[::-1]
 
 def fun_formatFileName(fileName):
-    return fileName
-    #return fileName[::-1]
+    #return fileName
+    return fileName[::-1]
 
 def rm_read_only(fn, tmp, info):
     if os.path.isfile(tmp):
@@ -127,12 +127,10 @@ for dirpath,dirnames,filenames in g:
 print("==========gDict==============")
 f=open(os.path.join(genPath, 'map.txt'), "w",encoding="utf-8")
 print("filename:", f.name)
-#for key, value in gDict.items():
-    #f.writelines([key.replace("\\", "/"), ",", value.replace("\\", "/"), "\n"])
 for key, value in gDictFile.items():
     f.writelines([key.replace("\\", "/"), ",", value.replace("\\", "/"), "\n"])
     print(key, "--->", value)
-    #os.system('F:\\gocpplua\\awesome-cpp\\CodeSegment\\Debug\\CodeSegment' + " 11111" + " 22222")
+    os.system('F:\\gocpplua\\awesome-cpp\\CodeSegment\\Debug\\CodeSegment' + " 11111" + " 22222")
 f.close()
 
 print("运行结束!! 耗时统计:", str(time.clock() - startTime))
