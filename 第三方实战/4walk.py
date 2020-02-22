@@ -85,4 +85,6 @@ print("filename:", f.name)
     #f.writelines([key.replace("\\", "/"), ",", value.replace("\\", "/"), "\n"])
 for key, value in gDictFile.items():
     f.writelines([key.replace("\\", "/"), ",", value.replace("\\", "/"), "\n"])
+    print(key, "--->", value)
+    os.system('F:\\gocpplua\\awesome-cpp\\CodeSegment\\Debug\\CodeSegment' + " 11111" + " 22222")
 f.close()
