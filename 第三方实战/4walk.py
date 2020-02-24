@@ -13,8 +13,8 @@
 
 #特殊说明:文件夹名或者文件名不能使用等号(=)
 
-#rootPath="E:\\Gitlab\\teen"
-rootPath="C:\\Users\\cq\\Desktop\\a"
+rootPath="E:\\Gitlab\\teen"
+#rootPath="C:\\Users\\cq\\Desktop\\a"
 spriteFramesPath="F:\\github\\python.git\\trunk\第三方实战"
 mapName = "map.txt"
 EXCLUDEDIRLIST=[".git", ".vscode"]
@@ -122,7 +122,7 @@ for dirpath,dirnames,filenames in g:
             break
     if bContinue:
         for filename in filenames:
-            bCopy = True
+            bPlist = False
             if filename not in EXCULUEFILELIST:
                 #考虑文件是否会存在文件后缀
                 splitFilename = filename.split('.')
@@ -138,26 +138,28 @@ for dirpath,dirnames,filenames in g:
                     fileSuffix = filename.split('.')[1]
                     if fileSuffix == "plist":
                         fileSuffix = fileSuffix[::-1]
-                        bCopy = False
+                        bPlist = True
                     fileFullPathAfter = os.path.join(gDict[dirpath],  fun_formatFileName(filePrefix) + "." +fileSuffix)
-                    ret = os.system(os.path.join(spriteFramesPath, "spriteframes") + " " + fileFullPathBefore + " " + fileFullPathAfter)
-                    if 0 != ret:
-                        print("[Error]spriteframes 执行失败!", "Path=", fileFullPathBefore)
-                        errorCount = errorCount + 1
-                        f.writelines(["[Error]spriteframes 执行失败!", "Path=", fileFullPathBefore, "\n"])
+                    
                     
                 else:
                     fileFullPathAfter = os.path.join(gDict[dirpath], filename)
                 print(fileFullPathBefore, " ---> ", fileFullPathAfter)
                 
-                if bCopy:
+                if bPlist:
+                    ret = os.system(os.path.join(spriteFramesPath, "spriteframes") + " " + fileFullPathBefore + " " + fileFullPathAfter)
+                    if 0 != ret:
+                        print("[Error]spriteframes 执行失败!", "Path=", fileFullPathBefore)
+                        errorCount = errorCount + 1
+                        f.writelines(["[Error]spriteframes 执行失败!", "Path=", fileFullPathBefore, "\n"])
+                else:
                     if os.path.exists(fileFullPathAfter):
                         errorCount = errorCount + 1
                         print("[Error]文件已经存在!", "Path=", fileFullPathAfter, "\n")
                         f.writelines(["[Error]文件已经存在!", "Path=", fileFullPathAfter, "\n"])
                         continue
                     shutil.copy(fileFullPathBefore, fileFullPathAfter)
-                    gDictFile[fileFullPathBefore] = fileFullPathAfter
+                gDictFile[fileFullPathBefore] = fileFullPathAfter
 
 print("==========gDict==============")
 print("filename:", f.name)
