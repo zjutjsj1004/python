@@ -7,6 +7,10 @@
 # 1、下载地址:https://imagemagick.org/script/download.php#windows
 # 2、命令行处理: magick XXX/源文件.jpg  XXX/目标文件.png, eg:magick image.jpg image.png  -- 文件名不能有空格
 
+#功能说明:使用第三方工具ImageMagick 进行图片资源微压缩/Hash值修改
+#其他：
+# 1、 Hash值查看工具:http://keir.net/hash.html
+
 ImageMagickPath="E:\\ImageMagick\\ImageMagick-7.0.9-Q16\\magick"
 rootPath="E:\\Gitlab\\teen_client"
 
