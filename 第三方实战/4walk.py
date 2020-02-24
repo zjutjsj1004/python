@@ -5,16 +5,21 @@
 # 2、保留原后缀，不过如果后缀是plist,也进行反转为:tsilp
 
 #参数说明: 
-# 1、rootPath 进行重命名的文件根路径
-# 2、EXCLUDEDIRLIST 目标文件夹下需要过滤的文件夹名称
-# 3、EXCULUEFILELIST 目标文件夹下需要过滤的文件名称
+# 1、rootPath:进行重命名的文件根路径
+# 2、spriteFramesPath:plist处理程序路径
+# 3、mapName 重命名前后文件夹名和文件名记录表(一般不允许更改)
+# 4、EXCLUDEDIRLIST:目标文件夹下需要过滤的文件夹名称
+# 5、EXCULUEFILELIST:目标文件夹下需要过滤的文件名称
 
 #特殊说明:文件夹名或者文件名不能使用等号(=)
 
-rootPath="E:\\Gitlab\\teen"
+#rootPath="E:\\Gitlab\\teen"
+rootPath="C:\\Users\\cq\\Desktop\\a"
+spriteFramesPath="F:\\github\\python.git\\trunk\第三方实战"
+mapName = "map.txt"
 EXCLUDEDIRLIST=[".git", ".vscode"]
-EXCULUEFILELIST=[""]
-#rootPath="C:\\Users\\cq\\Desktop\\a"
+EXCULUEFILELIST=[mapName]
+
 #conding=utf8  
 import os 
 import shutil
@@ -82,12 +87,16 @@ print("============开始运行============")
 startTime = time.clock()
 gDict = {}
 gDictFile = {}
+errorCount = 0
 
 pathinfo=os.path.split(rootPath)
 genPath = os.path.join(pathinfo[0], pathinfo[1]+"Gen")
 gDict[rootPath] = genPath
 print("rootPath", gDict[rootPath])
 clear_dir(genPath)
+
+#生成文件
+f=open(os.path.join(genPath, mapName), "w",encoding="utf-8")
 
 print("==========文件夹扫描和生成新文件夹==============")
 g = os.walk(rootPath) #walk不包括rootPath下面的文件
@@ -113,6 +122,7 @@ for dirpath,dirnames,filenames in g:
             break
     if bContinue:
         for filename in filenames:
+            bCopy = True
             if filename not in EXCULUEFILELIST:
                 #考虑文件是否会存在文件后缀
                 splitFilename = filename.split('.')
@@ -128,42 +138,47 @@ for dirpath,dirnames,filenames in g:
                     fileSuffix = filename.split('.')[1]
                     if fileSuffix == "plist":
                         fileSuffix = fileSuffix[::-1]
+                        bCopy = False
                     fileFullPathAfter = os.path.join(gDict[dirpath],  fun_formatFileName(filePrefix) + "." +fileSuffix)
+                    ret = os.system(os.path.join(spriteFramesPath, "spriteframes") + " " + fileFullPathBefore + " " + fileFullPathAfter)
+                    if 0 != ret:
+                        print("[Error]spriteframes 执行失败!", "Path=", fileFullPathBefore)
+                        errorCount = errorCount + 1
+                        f.writelines(["[Error]spriteframes 执行失败!", "Path=", fileFullPathBefore, "\n"])
+                    
                 else:
                     fileFullPathAfter = os.path.join(gDict[dirpath], filename)
                 print(fileFullPathBefore, " ---> ", fileFullPathAfter)
                 if os.path.exists(fileFullPathAfter):
-                    print("文件夹不存在")
+                    errorCount = errorCount + 1
+                    print("[Error]文件已经存在!", "Path=", fileFullPathAfter, "\n")
+                    f.writelines(["[Error]文件已经存在!", "Path=", fileFullPathAfter, "\n"])
                     continue
-                shutil.copy(fileFullPathBefore, fileFullPathAfter)
+                if bCopy:
+                    shutil.copy(fileFullPathBefore, fileFullPathAfter)
                 gDictFile[fileFullPathBefore] = fileFullPathAfter
-                #os.renames(os.path.join(dirpath,filename), os.path.join(dirpath,  formatDirName + "." +fileSuffix))
 
 print("==========gDict==============")
-bSuccess = True
-f=open(os.path.join(genPath, 'map.txt'), "w",encoding="utf-8")
 print("filename:", f.name)
 f.writelines(["[map]", "\n"])
 for key, value in gDictFile.items():
     f.writelines([SpecialThans(key), ":", SpecialThans(value), "\n"])
     if key.find("=") != -1:
         print("[Error]等号不能存在于文件夹名字或者文件名字，请重命名!!  ", key, "--->", value)
-        f.writelines(["[Error]等号不能存在于文件夹名字或者文件名字，请重命名!!", "\n"])
-        bSuccess = False
+        f.writelines(["[Error]等号不能存在于文件夹名字或者文件名字，请重命名!!", key, "--->", value, "\n"])
+        errorCount = errorCount + 1
         break
     print(key, "--->", value)
-f.close()
 
-if bSuccess:
-    ret = os.system('F:\\gocpplua\\awesome-cpp\\CodeSegment\\Debug\\CodeSegment' + " 11111" + " 22222")
-    if 0 != ret:
-        bSuccess = False
-        print("[Error]CodeSegment 执行失败!")
 
 costTime = time.clock() - startTime
-if bSuccess:
+if errorCount == 0:
     print("重命名文件和文件夹请查看下述路径:", genPath)
-    print("[Success]执行成功!! 耗时统计:", str(costTime))
+    print("[Success]执行成功!! 耗时:", str(costTime))
 else:
     print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-    print("[Error]执行失败!! 耗时统计:", str(costTime))
+    f.writelines(["[Error]执行失败!!", "共失败:", str(errorCount), "次。", "耗时:", str(costTime), "\n"])
+    print("[Error]执行失败!!", "共失败:",errorCount, "次.", "详细错误请查看文件:", mapName," 耗时:", str(costTime))
+
+f.flush()
+f.close()
