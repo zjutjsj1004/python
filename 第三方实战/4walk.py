@@ -1,19 +1,19 @@
-#开发环境说明：基于Python3开发
-#功能说明:此脚本实现目标文件夹下面，文件夹和文件的一键重命名功能。脚本执行后，默认在根文件夹(假设根文件夹名字为rootPath)同一目录生成rootPathGen。
-#重命名规则: 
-# 1、目前重命名后的文件名和文件夹名字是原文件夹名和文件名的反转。
-# 2、保留原后缀，不过如果后缀是plist,也进行反转为:tsilp
-
-#参数说明: 
+#使用说明:正确填写下述参数后直接运行脚本即可。参数说明:
 # 1、rootPath:进行重命名的文件根路径
 # 2、spriteFramesPath:plist处理程序路径
 # 3、mapName 重命名前后文件夹名和文件名记录表(一般不允许更改)
 # 4、EXCLUDEDIRLIST:目标文件夹下需要过滤的文件夹名称
 # 5、EXCULUEFILELIST:目标文件夹下需要过滤的文件名称
 
+#开发环境说明：基于Python3开发
+#功能说明:此脚本实现目标文件夹下面，文件夹和文件的一键重命名功能。脚本执行后，默认在根文件夹(假设根文件夹名字为rootPath)同一目录生成rootPathGen。
+#重命名规则: 
+# 1、目前重命名后的文件名和文件夹名字是原文件夹名和文件名的反转。
+# 2、保留原后缀，不过如果后缀是plist,也进行反转为:tsilp
+
 #特殊说明:文件夹名或者文件名不能使用等号(=)
 
-rootPath="E:\\Gitlab\\teen"
+rootPath="E:\\Gitlab\\teen_client"
 #rootPath="C:\\Users\\cq\\Desktop\\a"
 spriteFramesPath="F:\\github\\python.git\\trunk\第三方实战"
 mapName = "map.txt"
@@ -93,10 +93,13 @@ pathinfo=os.path.split(rootPath)
 genPath = os.path.join(pathinfo[0], pathinfo[1]+"Gen")
 gDict[rootPath] = genPath
 print("rootPath", gDict[rootPath])
+print("开始清理目标路径:",genPath)
 clear_dir(genPath)
+print("目标路径清理完成")
+time.sleep(3)
 
 #生成文件
-f=open(os.path.join(genPath, mapName), "w",encoding="utf-8")
+f=open(os.path.join(genPath, mapName), "w+",encoding="utf-8")
 
 print("==========文件夹扫描和生成新文件夹==============")
 g = os.walk(rootPath) #walk不包括rootPath下面的文件
@@ -165,7 +168,7 @@ print("==========gDict==============")
 print("filename:", f.name)
 f.writelines(["[map]", "\n"])
 for key, value in gDictFile.items():
-    f.writelines([SpecialThans(key), ":", SpecialThans(value), "\n"])
+    f.writelines([SpecialThans(key), "=", SpecialThans(value), "\n"])
     if key.find("=") != -1:
         print("[Error]等号不能存在于文件夹名字或者文件名字，请重命名!!  ", key, "--->", value)
         f.writelines(["[Error]等号不能存在于文件夹名字或者文件名字，请重命名!!", key, "--->", value, "\n"])
