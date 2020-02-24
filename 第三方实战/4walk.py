@@ -149,14 +149,15 @@ for dirpath,dirnames,filenames in g:
                 else:
                     fileFullPathAfter = os.path.join(gDict[dirpath], filename)
                 print(fileFullPathBefore, " ---> ", fileFullPathAfter)
-                if os.path.exists(fileFullPathAfter):
-                    errorCount = errorCount + 1
-                    print("[Error]文件已经存在!", "Path=", fileFullPathAfter, "\n")
-                    f.writelines(["[Error]文件已经存在!", "Path=", fileFullPathAfter, "\n"])
-                    continue
+                
                 if bCopy:
+                    if os.path.exists(fileFullPathAfter):
+                        errorCount = errorCount + 1
+                        print("[Error]文件已经存在!", "Path=", fileFullPathAfter, "\n")
+                        f.writelines(["[Error]文件已经存在!", "Path=", fileFullPathAfter, "\n"])
+                        continue
                     shutil.copy(fileFullPathBefore, fileFullPathAfter)
-                gDictFile[fileFullPathBefore] = fileFullPathAfter
+                    gDictFile[fileFullPathBefore] = fileFullPathAfter
 
 print("==========gDict==============")
 print("filename:", f.name)
