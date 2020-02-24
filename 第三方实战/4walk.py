@@ -1,15 +1,25 @@
+#开发环境说明：基于Python3开发
+#功能说明:此脚本实现目标文件夹下面，文件夹和文件的一键重命名功能。 目前重命名后的文件名和文件夹名字是原文件夹名和文件名的反转。
+#        脚本执行后，默认在根文件夹(假设根文件夹名字为rootPath)同一目录生成rootPathGen。
+#使用说明: 设置下面三个参数:
+# 1、rootPath 进行重命名的文件根路径
+# 2、EXCLUDEDIRLIST 目标文件夹下需要过滤的文件夹名称
+# 3、EXCULUEFILELIST 目标文件夹下需要过滤的文件名称
+rootPath="E:\\Gitlab\\teen"
+EXCLUDEDIRLIST=[".git", ".vscode"]
+EXCULUEFILELIST=[""]
+#rootPath="C:\\Users\\cq\\Desktop\\a"
 #conding=utf8  
 import os 
 import shutil
 import time
 import stat
 
+#
 def fun_formatDirPath(dirPath):
-    #return dirPath
     return dirPath[::-1]
 
 def fun_formatFileName(fileName):
-    #return fileName
     return fileName[::-1]
 
 def rm_read_only(fn, tmp, info):
@@ -24,7 +34,7 @@ def clear_dir(filepath):
     """
     清空某一目录下的所有文件或文件夹
     :param filepath: 路径
-    :return:
+    :return:无
     """
     if os.path.isdir(filepath):
         shutil.rmtree(filepath, onerror=rm_read_only)
@@ -62,24 +72,17 @@ print("============开始运行============")
 startTime = time.clock()
 gDict = {}
 gDictFile = {}
-#currPath="C:\\Users\\cq\\Desktop\\slot\\teen_an_Facebook-armeabi-release\\assets\\teen"
-currPath="E:\\Gitlab\\teen"
-#currPath="C:\\Users\\cq\\Desktop\\a"
 
-EXCLUDEDIRLIST=[".git", ".vscode"]
-EXCULUEFILELIST=["Node.csb"]
-
-pathinfo=os.path.split(currPath)
+pathinfo=os.path.split(rootPath)
 genPath = os.path.join(pathinfo[0], pathinfo[1]+"Gen")
-gDict[currPath] = genPath
-print("curr", gDict[currPath])
+gDict[rootPath] = genPath
+print("rootPath", gDict[rootPath])
 clear_dir(genPath)
 
 print("==========文件夹扫描和生成新文件夹==============")
-g = os.walk(currPath) #walk不包括currPath下面的文件
+g = os.walk(rootPath) #walk不包括rootPath下面的文件
 for dirpath,dirnames,filenames in g:
     bContinue = True
-    print(dirpath, type(EXCLUDEDIRLIST))
     for key in EXCLUDEDIRLIST:
         if dirpath.lower().find(key.lower()) != -1:
             bContinue = False
@@ -90,7 +93,7 @@ for dirpath,dirnames,filenames in g:
             if dirname.lower() not in EXCLUDEDIRLIST:
                 print(os.path.join(dirpath,dirname), " ---->", genNewDir(os.path.join(dirpath,dirname)))
         
-g = os.walk(currPath) #walk不包括currPath下面的文件
+g = os.walk(rootPath) #walk不包括rootPath下面的文件
 print("==========文件扫描和生成新文件==============")
 for dirpath,dirnames,filenames in g:
     bContinue = True
@@ -130,7 +133,12 @@ print("filename:", f.name)
 for key, value in gDictFile.items():
     f.writelines([key.replace("\\", "/"), ",", value.replace("\\", "/"), "\n"])
     print(key, "--->", value)
-    os.system('F:\\gocpplua\\awesome-cpp\\CodeSegment\\Debug\\CodeSegment' + " 11111" + " 22222")
 f.close()
 
+ret = os.system('F:\\gocpplua\\awesome-cpp\\CodeSegment\\Debug\\CodeSegment' + " 11111" + " 22222")
+if 0 != ret:
+    print("CodeSegment 执行失败!")
+    pass
+
 print("运行结束!! 耗时统计:", str(time.clock() - startTime))
+print("重命名文件和文件夹请查看下述路径:", genPath)
