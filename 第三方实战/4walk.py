@@ -8,7 +8,8 @@
 #开发环境说明：基于Python3开发
 #功能说明:此脚本实现目标文件夹下面，文件夹和文件的一键重命名功能。脚本执行后，默认在根文件夹(假设根文件夹名字为rootPath)同一目录生成rootPathGen。
 #重命名规则: 
-# 1、目前重命名后的文件名和文件夹名字是原文件夹名和文件名的反转。
+# 【弃用】1、目前重命名后的文件名和文件夹名字是原文件夹名和文件名的反转。
+# 【20200226更新】1、目前重命名后的文件名和文件夹名字是原文件夹名和文件名从1开始递增。
 # 2、保留原后缀，不过如果后缀是plist,也进行反转为:tsilp
 
 #特殊说明:文件夹名或者文件名不能使用等号(=)
@@ -25,13 +26,22 @@ import os
 import shutil
 import time
 import stat
+import hashlib
 
-#
+dirBegin = 0
+fileBegin = 0
+
 def fun_formatDirPath(dirPath):
-    return dirPath[::-1]
+    global dirBegin
+    dirBegin = dirBegin + 1
+    return str(dirBegin)
+    #return dirPath[::-1]
 
 def fun_formatFileName(fileName):
-    return fileName[::-1]
+    global fileBegin
+    fileBegin = fileBegin + 1
+    return str(fileBegin + 1)
+    #return fileName[::-1]
 
 def rm_read_only(fn, tmp, info):
     if os.path.isfile(tmp):
@@ -84,7 +94,7 @@ def SpecialThans(str):
     return str.replace("\\", "/")
 
 print("============开始运行============")
-startTime = time.clock()
+startTime = time.time()
 gDict = {}
 gDictFile = {}
 errorCount = 0
@@ -143,10 +153,8 @@ for dirpath,dirnames,filenames in g:
                         fileSuffix = fileSuffix[::-1]
                         bPlist = True
                     fileFullPathAfter = os.path.join(gDict[dirpath],  fun_formatFileName(filePrefix) + "." +fileSuffix)
-                    
-                    
                 else:
-                    fileFullPathAfter = os.path.join(gDict[dirpath], filename)
+                    fileFullPathAfter = os.path.join(gDict[dirpath], fun_formatFileName(filename))
                 print(fileFullPathBefore, " ---> ", fileFullPathAfter)
                 
                 if bPlist:
@@ -167,6 +175,15 @@ for dirpath,dirnames,filenames in g:
 print("==========gDict==============")
 print("filename:", f.name)
 f.writelines(["[map]", "\n"])
+for key, value in gDict.items():
+    f.writelines([SpecialThans(key), "=", SpecialThans(value), "\n"])
+    if key.find("=") != -1:
+        print("[Error]等号不能存在于文件夹名字或者文件名字，请重命名!!  ", key, "--->", value)
+        f.writelines(["[Error]等号不能存在于文件夹名字或者文件名字，请重命名!!", key, "--->", value, "\n"])
+        errorCount = errorCount + 1
+        break
+    print(key, "--->", value)
+
 for key, value in gDictFile.items():
     f.writelines([SpecialThans(key), "=", SpecialThans(value), "\n"])
     if key.find("=") != -1:
@@ -177,7 +194,8 @@ for key, value in gDictFile.items():
     print(key, "--->", value)
 
 
-costTime = time.clock() - startTime
+
+costTime = time.time() - startTime
 if errorCount == 0:
     print("重命名文件和文件夹请查看下述路径:", genPath)
     print("[Success]执行成功!! 耗时:", str(costTime))
