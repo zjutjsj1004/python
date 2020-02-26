@@ -5,7 +5,7 @@
 # 4、mapName 重命名前后文件夹名和文件名记录表(一般不允许更改)
 # 5、EXCLUDEDIRLIST:目标文件夹下需要过滤的文件夹名称
 # 6、EXCULUEFILELIST:目标文件夹下需要过滤的文件名称
-# 7、mapPath 指定map.txt转成flatbuffers后,在 genPath 中的相对路径名+文件名
+# 7、mapFullPath 指定map.txt转成flatbuffers后绝对路径及文件名
 # 8、把map.txt用maps.exe转成flatbuffers格式的文件，并删除map.txt
 
 #开发环境说明：基于Python3开发
@@ -17,13 +17,14 @@
 
 #特殊说明:文件夹名或者文件名不能使用等号(=)
 
-rootPath= "E:\\Gitlab\\teen_client"
-genPath = "E:\\Gitlab\\teen_client_gen"
-toolsPath="F:\\github\\python.git\\trunk\\第三方实战\\tools"
-mapPath =  "a\\manything.luac"
+rootPath= "D:\\syncthing\\MCRuntime_IOS\\frameworks\\runtime-src\\teen_client-feature-ios"
+genPath = "D:\\syncthing\\MCRuntime_IOS\\frameworks\\runtime-src\\assets\\teen"
+toolsPath="D:\\syncthing\\MCRuntime_IOS\\tools"
+mapFullPath =  "D:\\syncthing\\MCRuntime_IOS\\frameworks\\runtime-src\\assets\\manythings.luac"
+reverseMapFullPath =  "D:\\syncthing\\MCRuntime_IOS\\frameworks\\runtime-src\\assets\\somethings.luac"
 mapName = "map.txt"
 EXCLUDEDIRLIST=[".git", ".vscode"]
-EXCULUEFILELIST=[mapName]
+EXCULUEFILELIST=[mapName,"AppConfig.json"]
 
 #conding=utf8  
 import os 
@@ -94,7 +95,10 @@ def genNewDir(oldDir):
 
 # 字符串特殊处理("\\"-> "/")
 def SpecialThans(str):
-    return str.replace("\\", "/")
+    str = str.replace("\\", "/")
+    if len(str) > 0 and str[0] == '/':
+        str = str[1:]
+    return str
 
 print("============开始运行============")
 startTime = time.time()
@@ -181,7 +185,10 @@ print("==========gDict==============")
 print("filename:", f.name)
 f.writelines(["[map]", "\n"])
 for key, value in gDict.items():
-    f.writelines([SpecialThans(key.replace(rootPath, ".")), "=", SpecialThans(value.replace(genPath, ".")), "\n"])
+    k = SpecialThans(key.replace(rootPath, ""))
+    v = SpecialThans(value.replace(genPath, ""))
+    if len(k) >0 and len(v) >0:
+        f.writelines([k, "=", v, "\n"])
     if key.find("=") != -1:
         print("[Error]等号不能存在于文件夹名字或者文件名字，请重命名!!  ", key, "--->", value)
         f.writelines(["[Error]等号不能存在于文件夹名字或者文件名字，请重命名!!", key, "--->", value, "\n"])
@@ -190,7 +197,7 @@ for key, value in gDict.items():
     print(key, "--->", value)
 
 for key, value in gDictFile.items():
-    f.writelines([SpecialThans(key.replace(rootPath, ".")), "=", SpecialThans(value.replace(genPath, ".")), "\n"])
+    f.writelines([SpecialThans(key.replace(rootPath, "")), "=", SpecialThans(value.replace(genPath, "")), "\n"])
     if key.find("=") != -1:
         print("[Error]等号不能存在于文件夹名字或者文件名字，请重命名!!  ", key, "--->", value)
         f.writelines(["[Error]等号不能存在于文件夹名字或者文件名字，请重命名!!", key, "--->", value, "\n"])
@@ -211,11 +218,10 @@ else:
 f.flush()
 f.close()
 
-mapFullPath = os.path.join(genPath, mapPath)
 if os.path.exists(os.path.dirname(mapFullPath)) is False:
     os.makedirs(os.path.dirname(mapFullPath))
-os.system(os.path.join(toolsPath, "maps") + " "+ os.path.join(genPath, mapName) + " " + mapFullPath)
-os.remove(os.path.join(genPath, mapName))
+os.system(os.path.join(toolsPath, "maps") + " "+ os.path.join(genPath, mapName) + " " + mapFullPath + " " +reverseMapFullPath)
+#os.remove(os.path.join(genPath, mapName))
 
 
 
