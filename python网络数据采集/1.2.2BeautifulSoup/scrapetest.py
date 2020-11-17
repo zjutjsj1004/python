@@ -2,7 +2,7 @@ from urllib.request import urlopen
 from bs4 import BeautifulSoup
 html = urlopen("http://www.pythonscraping.com/pages/page1.html")
 bsObj = BeautifulSoup(html.read(), "html.parser")#
-#bsObj = BeautifulSoup(html.read())
+bsObj = BeautifulSoup(html.read())
 '''
 不加"html.parser"会存在警告:UserWarning: No parser was explicitly specified, so I'm using the bes
 t available HTML parser for this system ("html.parser"). This usually isn't a problem, but if you run this code on anoth
