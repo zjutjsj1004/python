@@ -12,4 +12,8 @@ def main():
 
 main()
 
-# 调试: python3 -m pdb 4pdb调试.py 
+# 调试: 
+# 1. python3 -m pdb 4pdb调试.py 
+# 2.  b 4pdb调试.py:8    第八行添加断点
+# 3. c   运行
+# 4. p n  / p s   打印变量值
