@@ -7,7 +7,7 @@ def all_path(dirname):
         print(maindir, subdir)
         for filename in file_name_list:
             apath = os.path.join(maindir, filename)
-            if apath.endswith('txtt'):
+            if apath.endswith('mkv'):
                 base_name=int(os.path.splitext(filename)[0])
                 print(apath, base_name, maindir)
                 for cmaindir, csubdir, cfile_name_list in os.walk(maindir):
@@ -15,7 +15,7 @@ def all_path(dirname):
                     ccname = ""
                     for cfilename in cfile_name_list:
                         cpath = os.path.join(cmaindir, cfilename)
-                        if cpath.endswith('c'):
+                        if cpath.endswith('mp4') or cpath.endswith('invs'):
                             ccname = cpath
                     result.append({"index": base_name, "txttfilepath": apath, "dirpath": maindir, "ccfilepath": ccname})
     resultSort = sorted(result, key = lambda i: i['index'])
