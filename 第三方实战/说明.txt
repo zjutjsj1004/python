@@ -1,5 +1,5 @@
-1AlibabaKeyWords.py°´¹Ø¼ü×ÖÅÀ°¢Àï°Í°ÍÆóÒµ²É¹ºÍø£¬Êä³öµ½excel±íÀïÁË
-2douban.pyµÇÂ½¶¹°ê
-3ÍøÒ×ÔÆ»ñÈ¡ÆÀÂÛ
+1AlibabaKeyWords.pyæŒ‰å…³é”®å­—çˆ¬é˜¿é‡Œå·´å·´ä¼ä¸šé‡‡è´­ç½‘ï¼Œè¾“å‡ºåˆ°excelè¡¨é‡Œäº†
+2douban.pyç™»é™†è±†ç“£
+3ç½‘æ˜“äº‘è·å–è¯„è®º
 
-OJ£ºhttps://www.codewars.com ÓÊÏä£º3100XX£¬  ÓÃ»§Ãû:CoderChen  mm£ºchen..0
+OJï¼šhttps://www.codewars.com é‚®ç®±ï¼š3100XXï¼Œ  ç”¨æˆ·å:CoderChen  mmï¼šchen..0
