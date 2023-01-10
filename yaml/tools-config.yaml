@@ -1,0 +1,13 @@
+utm_coordinate: True
+ply_format: ['las','pnts'] 
+obj_format: ['ply','b3dm']
+
+
+## ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[重要!!!]~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#sfm.yaml中暴露的参数
+sfm_yaml_param:
+  #来自sfm.yaml中的字段,例如 detect_apriltag: 0 
+  
+#mvs.yaml中暴露的参数
+mvs_yaml_param:
+  max_image_size: 4000  #自定义分辨率, reconstruction_quality=3时才起作用
