@@ -1,0 +1,994 @@
+{
+    "images": [
+        {
+            "id": 2,
+            "dataset_id": 1,
+            "category_ids": [
+                1
+            ],
+            "path": "/datasets/cabinet/view_00_00_01.jpeg",
+            "width": 1920,
+            "height": 1080,
+            "file_name": "view_00_00_01.jpeg",
+            "annotated": true,
+            "annotating": [],
+            "num_annotations": 11,
+            "metadata": {},
+            "milliseconds": 2975779,
+            "events": [
+                {
+                    "_cls": "SessionEvent",
+                    "user": "shiqi",
+                    "milliseconds": 16333,
+                    "tools_used": []
+                },
+                {
+                    "_cls": "SessionEvent",
+                    "user": "shiqi",
+                    "milliseconds": 210473,
+                    "tools_used": []
+                },
+                {
+                    "_cls": "SessionEvent",
+                    "user": "shiqi",
+                    "milliseconds": 80827,
+                    "tools_used": []
+                },
+                {
+                    "_cls": "SessionEvent",
+                    "user": "shiqi",
+                    "milliseconds": 2668146,
+                    "tools_used": []
+                }
+            ],
+            "regenerate_thumbnail": false,
+            "is_modified": false
+        },
+        {
+            "id": 5,
+            "dataset_id": 1,
+            "category_ids": [
+                1
+            ],
+            "path": "/datasets/cabinet/view_00_00_04.jpeg",
+            "width": 1920,
+            "height": 1080,
+            "file_name": "view_00_00_04.jpeg",
+            "annotated": true,
+            "annotating": [],
+            "num_annotations": 6,
+            "metadata": {},
+            "milliseconds": 27506674,
+            "events": [
+                {
+                    "_cls": "SessionEvent",
+                    "user": "shiqi",
+                    "milliseconds": 6479598,
+                    "tools_used": []
+                },
+                {
+                    "_cls": "SessionEvent",
+                    "user": "shiqi",
+                    "milliseconds": 67766,
+                    "tools_used": []
+                },
+                {
+                    "_cls": "SessionEvent",
+                    "user": "shiqi",
+                    "milliseconds": 149939,
+                    "tools_used": []
+                },
+                {
+                    "_cls": "SessionEvent",
+                    "user": "shiqi",
+                    "milliseconds": 143737,
+                    "tools_used": []
+                },
+                {
+                    "_cls": "SessionEvent",
+                    "user": "shiqi",
+                    "milliseconds": 10758013,
+                    "tools_used": []
+                },
+                {
+                    "_cls": "SessionEvent",
+                    "user": "shiqi",
+                    "milliseconds": 0,
+                    "tools_used": []
+                },
+                {
+                    "_cls": "SessionEvent",
+                    "user": "shiqi",
+                    "milliseconds": 5604882,
+                    "tools_used": []
+                },
+                {
+                    "_cls": "SessionEvent",
+                    "user": "shiqi",
+                    "milliseconds": 0,
+                    "tools_used": []
+                },
+                {
+                    "_cls": "SessionEvent",
+                    "user": "shiqi",
+                    "milliseconds": 92566,
+                    "tools_used": []
+                },
+                {
+                    "_cls": "SessionEvent",
+                    "user": "shiqi",
+                    "milliseconds": 23341,
+                    "tools_used": []
+                },
+                {
+                    "_cls": "SessionEvent",
+                    "user": "shiqi",
+                    "milliseconds": 1706019,
+                    "tools_used": []
+                },
+                {
+                    "_cls": "SessionEvent",
+                    "user": "shiqi",
+                    "milliseconds": 1395232,
+                    "tools_used": []
+                },
+                {
+                    "_cls": "SessionEvent",
+                    "user": "shiqi",
+                    "milliseconds": 12736,
+                    "tools_used": []
+                },
+                {
+                    "_cls": "SessionEvent",
+                    "user": "shiqi",
+                    "milliseconds": 1072845,
+                    "tools_used": []
+                }
+            ],
+            "regenerate_thumbnail": false,
+            "is_modified": false
+        }
+    ],
+    "categories": [
+        {
+            "id": 1,
+            "name": "cabinet",
+            "supercategory": "",
+            "color": "#0053fa",
+            "metadata": {},
+            "creator": "shiqi",
+            "keypoint_colors": []
+        },
+        {
+            "id": 2,
+            "name": "aircs",
+            "supercategory": "",
+            "color": "#2ec903",
+            "metadata": {},
+            "creator": "shiqi",
+            "keypoint_colors": []
+        },
+        {
+            "id": 3,
+            "name": "batteries",
+            "supercategory": "",
+            "color": "#5106c1",
+            "metadata": {},
+            "creator": "shiqi",
+            "keypoint_colors": []
+        },
+        {
+            "id": 4,
+            "name": " box",
+            "supercategory": "",
+            "color": "#fae500",
+            "metadata": {},
+            "creator": "shiqi",
+            "keypoint_colors": []
+        },
+        {
+            "id": 5,
+            "name": "box_on_wall",
+            "supercategory": "",
+            "color": "#df0101",
+            "metadata": {},
+            "creator": "shiqi",
+            "keypoint_colors": []
+        }
+    ],
+    "annotations": [
+        {
+            "id": 46,
+            "image_id": 2,
+            "category_id": 1,
+            "dataset_id": 1,
+            "segmentation": [
+                [
+                    322.9,
+                    259.8,
+                    322.9,
+                    857.9,
+                    151.7,
+                    857.9,
+                    151.7,
+                    259.8
+                ]
+            ],
+            "area": 102258,
+            "bbox": [
+                152,
+                260,
+                171,
+                598
+            ],
+            "iscrowd": false,
+            "isbbox": true,
+            "creator": "shiqi",
+            "width": 1920,
+            "height": 1080,
+            "color": "#74fb4a",
+            "metadata": {},
+            "milliseconds": 13059,
+            "events": [
+                {
+                    "_cls": "SessionEvent",
+                    "created_at": {
+                        "$date": 1675750547913
+                    },
+                    "user": "shiqi",
+                    "milliseconds": 13059,
+                    "tools_used": [
+                        "Brush",
+                        "BBox"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 47,
+            "image_id": 2,
+            "category_id": 1,
+            "dataset_id": 1,
+            "segmentation": [
+                [
+                    487.2,
+                    257.3,
+                    487.2,
+                    855.5,
+                    322.5,
+                    855.5,
+                    322.5,
+                    257.3
+                ]
+            ],
+            "area": 98236,
+            "bbox": [
+                323,
+                257,
+                164,
+                599
+            ],
+            "iscrowd": false,
+            "isbbox": true,
+            "creator": "shiqi",
+            "width": 1920,
+            "height": 1080,
+            "color": "#ea5030",
+            "metadata": {},
+            "milliseconds": 997940,
+            "events": [
+                {
+                    "_cls": "SessionEvent",
+                    "created_at": {
+                        "$date": 1675750577509
+                    },
+                    "user": "shiqi",
+                    "milliseconds": 498970,
+                    "tools_used": [
+                        "BBox",
+                        "Select",
+                        "BBox"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 50,
+            "image_id": 2,
+            "category_id": 1,
+            "dataset_id": 1,
+            "segmentation": [
+                [
+                    651.7,
+                    258.7,
+                    651.7,
+                    850.4,
+                    487.9,
+                    850.4,
+                    487.9,
+                    258.7
+                ]
+            ],
+            "area": 96924,
+            "bbox": [
+                488,
+                259,
+                164,
+                591
+            ],
+            "iscrowd": false,
+            "isbbox": true,
+            "creator": "shiqi",
+            "width": 1920,
+            "height": 1080,
+            "color": "#07fea0",
+            "metadata": {},
+            "milliseconds": 21350,
+            "events": [
+                {
+                    "_cls": "SessionEvent",
+                    "created_at": {
+                        "$date": 1675751091364
+                    },
+                    "user": "shiqi",
+                    "milliseconds": 10675,
+                    "tools_used": [
+                        "BBox",
+                        "Select",
+                        "BBox"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 52,
+            "image_id": 2,
+            "category_id": 1,
+            "dataset_id": 1,
+            "segmentation": [
+                [
+                    814.3,
+                    260,
+                    814.3,
+                    851.7,
+                    655.6,
+                    851.7,
+                    655.6,
+                    260
+                ]
+            ],
+            "area": 93536,
+            "bbox": [
+                656,
+                260,
+                158,
+                592
+            ],
+            "iscrowd": false,
+            "isbbox": true,
+            "creator": "shiqi",
+            "width": 1920,
+            "height": 1080,
+            "color": "#fe9755",
+            "metadata": {},
+            "milliseconds": 7482,
+            "events": [
+                {
+                    "_cls": "SessionEvent",
+                    "created_at": {
+                        "$date": 1675751102040
+                    },
+                    "user": "shiqi",
+                    "milliseconds": 7482,
+                    "tools_used": [
+                        "BBox"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 53,
+            "image_id": 2,
+            "category_id": 1,
+            "dataset_id": 1,
+            "segmentation": [
+                [
+                    979.4,
+                    260,
+                    979.4,
+                    851.7,
+                    818.2,
+                    851.7,
+                    818.2,
+                    260
+                ]
+            ],
+            "area": 95312,
+            "bbox": [
+                818,
+                260,
+                161,
+                592
+            ],
+            "iscrowd": false,
+            "isbbox": true,
+            "creator": "shiqi",
+            "width": 1920,
+            "height": 1080,
+            "color": "#b3d13e",
+            "metadata": {},
+            "milliseconds": 5077,
+            "events": [
+                {
+                    "_cls": "SessionEvent",
+                    "created_at": {
+                        "$date": 1675751109522
+                    },
+                    "user": "shiqi",
+                    "milliseconds": 5077,
+                    "tools_used": [
+                        "BBox"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 54,
+            "image_id": 2,
+            "category_id": 1,
+            "dataset_id": 1,
+            "segmentation": [
+                [
+                    985.9,
+                    267.8,
+                    985.9,
+                    265.2,
+                    988.5,
+                    265.2,
+                    988.5,
+                    267.8
+                ]
+            ],
+            "area": 9,
+            "bbox": [
+                986,
+                265,
+                3,
+                3
+            ],
+            "iscrowd": false,
+            "isbbox": true,
+            "creator": "shiqi",
+            "width": 1920,
+            "height": 1080,
+            "color": "#09cd05",
+            "metadata": {},
+            "milliseconds": 1805,
+            "events": [
+                {
+                    "_cls": "SessionEvent",
+                    "created_at": {
+                        "$date": 1675751114600
+                    },
+                    "user": "shiqi",
+                    "milliseconds": 1805,
+                    "tools_used": [
+                        "BBox"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 55,
+            "image_id": 2,
+            "category_id": 1,
+            "dataset_id": 1,
+            "segmentation": [
+                [
+                    1143.3,
+                    261.3,
+                    1143.3,
+                    853,
+                    978.1,
+                    853,
+                    978.1,
+                    261.3
+                ]
+            ],
+            "area": 97680,
+            "bbox": [
+                978,
+                261,
+                165,
+                592
+            ],
+            "iscrowd": false,
+            "isbbox": true,
+            "creator": "shiqi",
+            "width": 1920,
+            "height": 1080,
+            "color": "#6ff3a9",
+            "metadata": {},
+            "milliseconds": 13687,
+            "events": [
+                {
+                    "_cls": "SessionEvent",
+                    "created_at": {
+                        "$date": 1675751116406
+                    },
+                    "user": "shiqi",
+                    "milliseconds": 13687,
+                    "tools_used": [
+                        "BBox",
+                        "Select",
+                        "BBox"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 56,
+            "image_id": 2,
+            "category_id": 1,
+            "dataset_id": 1,
+            "segmentation": [
+                [
+                    1308.4,
+                    262.6,
+                    1308.4,
+                    853,
+                    1143.3,
+                    853,
+                    1143.3,
+                    262.6
+                ]
+            ],
+            "area": 97350,
+            "bbox": [
+                1143,
+                263,
+                165,
+                590
+            ],
+            "iscrowd": false,
+            "isbbox": true,
+            "creator": "shiqi",
+            "width": 1920,
+            "height": 1080,
+            "color": "#d43d6b",
+            "metadata": {},
+            "milliseconds": 14163,
+            "events": [
+                {
+                    "_cls": "SessionEvent",
+                    "created_at": {
+                        "$date": 1675751130094
+                    },
+                    "user": "shiqi",
+                    "milliseconds": 14163,
+                    "tools_used": [
+                        "BBox",
+                        "Select",
+                        "BBox"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 57,
+            "image_id": 2,
+            "category_id": 1,
+            "dataset_id": 1,
+            "segmentation": [
+                [
+                    1477.4,
+                    260,
+                    1477.4,
+                    858.2,
+                    1313.6,
+                    858.2,
+                    1313.6,
+                    260
+                ]
+            ],
+            "area": 97474,
+            "bbox": [
+                1314,
+                260,
+                163,
+                598
+            ],
+            "iscrowd": false,
+            "isbbox": true,
+            "creator": "shiqi",
+            "width": 1920,
+            "height": 1080,
+            "color": "#49a6fe",
+            "metadata": {},
+            "milliseconds": 6219,
+            "events": [
+                {
+                    "_cls": "SessionEvent",
+                    "created_at": {
+                        "$date": 1675751144258
+                    },
+                    "user": "shiqi",
+                    "milliseconds": 6219,
+                    "tools_used": [
+                        "BBox"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 58,
+            "image_id": 2,
+            "category_id": 1,
+            "dataset_id": 1,
+            "segmentation": [
+                [
+                    1643.9,
+                    254.8,
+                    1643.9,
+                    851.7,
+                    1481.3,
+                    851.7,
+                    1481.3,
+                    254.8
+                ]
+            ],
+            "area": 97311,
+            "bbox": [
+                1481,
+                255,
+                163,
+                597
+            ],
+            "iscrowd": false,
+            "isbbox": true,
+            "creator": "shiqi",
+            "width": 1920,
+            "height": 1080,
+            "color": "#dcc950",
+            "metadata": {},
+            "milliseconds": 22474,
+            "events": [
+                {
+                    "_cls": "SessionEvent",
+                    "created_at": {
+                        "$date": 1675751150477
+                    },
+                    "user": "shiqi",
+                    "milliseconds": 22474,
+                    "tools_used": [
+                        "BBox",
+                        "Select",
+                        "BBox"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 59,
+            "image_id": 2,
+            "category_id": 1,
+            "dataset_id": 1,
+            "segmentation": [
+                [
+                    1804.1,
+                    256.4,
+                    1804.1,
+                    851.6,
+                    1648.4,
+                    851.6,
+                    1648.4,
+                    256.4
+                ]
+            ],
+            "area": 92976,
+            "bbox": [
+                1648,
+                256,
+                156,
+                596
+            ],
+            "iscrowd": false,
+            "isbbox": true,
+            "creator": "shiqi",
+            "width": 1920,
+            "height": 1080,
+            "color": "#751fc4",
+            "metadata": {},
+            "milliseconds": 14866,
+            "events": [
+                {
+                    "_cls": "SessionEvent",
+                    "created_at": {
+                        "$date": 1675751184924
+                    },
+                    "user": "shiqi",
+                    "milliseconds": 7433,
+                    "tools_used": [
+                        "BBox"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 16,
+            "image_id": 5,
+            "category_id": 1,
+            "dataset_id": 1,
+            "segmentation": [
+                [
+                    666.9,
+                    250.6,
+                    666.9,
+                    852.8,
+                    498.2,
+                    852.8,
+                    498.2,
+                    250.6
+                ]
+            ],
+            "area": 101738,
+            "bbox": [
+                498,
+                251,
+                169,
+                602
+            ],
+            "iscrowd": false,
+            "isbbox": true,
+            "creator": "shiqi",
+            "width": 1920,
+            "height": 1080,
+            "color": "#e77895",
+            "metadata": {},
+            "milliseconds": 10958,
+            "events": [
+                {
+                    "_cls": "SessionEvent",
+                    "created_at": {
+                        "$date": 1673867815678
+                    },
+                    "user": "shiqi",
+                    "milliseconds": 10958,
+                    "tools_used": [
+                        "BBox"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 17,
+            "image_id": 5,
+            "category_id": 1,
+            "dataset_id": 1,
+            "segmentation": [
+                [
+                    500.4,
+                    250.6,
+                    500.4,
+                    852.8,
+                    335,
+                    852.8,
+                    335,
+                    250.6
+                ]
+            ],
+            "area": 99330,
+            "bbox": [
+                335,
+                251,
+                165,
+                602
+            ],
+            "iscrowd": false,
+            "isbbox": true,
+            "creator": "shiqi",
+            "width": 1920,
+            "height": 1080,
+            "color": "#0b2fae",
+            "metadata": {},
+            "milliseconds": 4700,
+            "events": [
+                {
+                    "_cls": "SessionEvent",
+                    "created_at": {
+                        "$date": 1673867826636
+                    },
+                    "user": "shiqi",
+                    "milliseconds": 4700,
+                    "tools_used": [
+                        "BBox"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 18,
+            "image_id": 5,
+            "category_id": 1,
+            "dataset_id": 1,
+            "segmentation": [
+                [
+                    819.7,
+                    279.8,
+                    819.7,
+                    882.1,
+                    661.9,
+                    882.1,
+                    661.9,
+                    279.8
+                ]
+            ],
+            "area": 95116,
+            "bbox": [
+                662,
+                280,
+                158,
+                602
+            ],
+            "iscrowd": false,
+            "isbbox": true,
+            "creator": "shiqi",
+            "width": 1920,
+            "height": 1080,
+            "color": "#ee47e9",
+            "metadata": {},
+            "milliseconds": 156628,
+            "events": [
+                {
+                    "_cls": "SessionEvent",
+                    "created_at": {
+                        "$date": 1673867924141
+                    },
+                    "user": "shiqi",
+                    "milliseconds": 75713,
+                    "tools_used": [
+                        "BBox",
+                        "Select"
+                    ]
+                },
+                {
+                    "_cls": "SessionEvent",
+                    "created_at": {
+                        "$date": 1675326361691
+                    },
+                    "user": "shiqi",
+                    "milliseconds": 5202,
+                    "tools_used": [
+                        "Select"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 20,
+            "image_id": 5,
+            "category_id": 1,
+            "dataset_id": 1,
+            "segmentation": [
+                [
+                    999.8,
+                    253.6,
+                    999.8,
+                    855.5,
+                    833.1,
+                    855.5,
+                    833.1,
+                    253.6
+                ]
+            ],
+            "area": 100534,
+            "bbox": [
+                833,
+                254,
+                167,
+                602
+            ],
+            "iscrowd": false,
+            "isbbox": true,
+            "creator": "shiqi",
+            "width": 1920,
+            "height": 1080,
+            "color": "#50e9fd",
+            "metadata": {},
+            "milliseconds": 11939,
+            "events": [
+                {
+                    "_cls": "SessionEvent",
+                    "created_at": {
+                        "$date": 1673867999855
+                    },
+                    "user": "shiqi",
+                    "milliseconds": 11939,
+                    "tools_used": [
+                        "BBox"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 21,
+            "image_id": 5,
+            "category_id": 1,
+            "dataset_id": 1,
+            "segmentation": [
+                [
+                    1154.5,
+                    261.4,
+                    1154.5,
+                    853.3,
+                    1013.2,
+                    853.3,
+                    1013.2,
+                    261.4
+                ]
+            ],
+            "area": 84064,
+            "bbox": [
+                1013,
+                261,
+                142,
+                592
+            ],
+            "iscrowd": false,
+            "isbbox": true,
+            "creator": "shiqi",
+            "width": 1920,
+            "height": 1080,
+            "color": "#8600b5",
+            "metadata": {},
+            "milliseconds": 9762,
+            "events": [
+                {
+                    "_cls": "SessionEvent",
+                    "created_at": {
+                        "$date": 1673868011796
+                    },
+                    "user": "shiqi",
+                    "milliseconds": 9762,
+                    "tools_used": [
+                        "BBox"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 22,
+            "image_id": 5,
+            "category_id": 1,
+            "dataset_id": 1,
+            "segmentation": [
+                [
+                    329.4,
+                    263.7,
+                    329.4,
+                    860,
+                    156.8,
+                    860,
+                    156.8,
+                    263.7
+                ]
+            ],
+            "area": 102512,
+            "bbox": [
+                157,
+                264,
+                172,
+                596
+            ],
+            "iscrowd": false,
+            "isbbox": true,
+            "creator": "shiqi",
+            "width": 1920,
+            "height": 1080,
+            "color": "#b22572",
+            "metadata": {},
+            "milliseconds": 0,
+            "events": []
+        }
+    ]
+}
