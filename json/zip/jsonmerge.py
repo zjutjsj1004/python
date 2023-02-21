@@ -6,6 +6,10 @@ def AnalysisJson():
     for root,dirs,files in os.walk(file_path):  # 遍历file_path下所有的子目录及文件
         for dir in dirs:
             for rootTmp,dirsTmp,filesTmp in os.walk(os.path.join(root, dir)): 
+                mergeData = {}
+                mergeData["images"] = []
+                mergeData["categories"] = []
+                mergeData["annotations"] = []
                 for fileTmp in filesTmp:  #遍历当前路径下所有非目录子文件
                     print(rootTmp)
                     if os.path.splitext(fileTmp)[1] == '.json': #只获取Json格式的文件
@@ -15,13 +19,15 @@ def AnalysisJson():
                             mergeData["images"].extend(temp["images"])
                             mergeData["categories"].extend(temp["categories"])
                             mergeData["annotations"].extend(temp["annotations"])
-                with open(os.path.join(rootTmp, "merge.json"), "w") as outfile: 
-                    json.dump(mergeData, outfile)
+                
+                mergejson = os.path.join(rootTmp, "merge.json")
+                if os.path.isfile(mergejson):
+                    print("remove {0}".format(mergejson))
+                    os.remove(mergejson)
+                #with open(mergejson, "w") as outfile: 
+                #    json.dump(mergeData, outfile)
 
-mergeData = {}
-mergeData["images"] = []
-mergeData["categories"] = []
-mergeData["annotations"] = []
+
 if __name__ == '__main__':
     AnalysisJson()
 
