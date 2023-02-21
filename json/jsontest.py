@@ -19,6 +19,17 @@ json_object = json.dumps(dictionary, indent=4)
 with open("sample.json", "w") as outfile:
     outfile.write(json_object)
 
+print("deviceType1")
+device_json = '/data/gocpplua/python/json/device.json'
+with open(device_json, 'r') as f:
+    data = json.load(f)
+    device_type = data.get('deviceType', 'Insta360 ONE X2')
+    print(device_type)
+
+print("deviceType2")
+data = json.loads(device_json)
+device_type = data.get('deviceType', 'Insta360 ONE X2')
+print(device_type)
 
 # "images", "categories,"annotations"
 with open('/data/gocpplua/python/json/view_00_00_01.json', 'r') as f:
