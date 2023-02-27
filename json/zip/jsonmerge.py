@@ -1,6 +1,17 @@
 import os
 import json
 
+
+def MergeCoco(listTO, listFrom):
+    for valFrom in listFrom:
+        find = False
+        for valTo in listTO:
+            if valFrom['id'] == valTo['id']:
+                find = True
+        if not find:
+            listTO.append(valFrom)
+    return listTO
+
 def AnalysisJson():
     file_path = "/data/gocpplua/python/json/zip/"
     for root,dirs,files in os.walk(file_path):  # 遍历file_path下所有的子目录及文件
@@ -19,9 +30,12 @@ def AnalysisJson():
                         with open(os.path.join(rootTmp, fileTmp), encoding="utf-8", mode='r') as f:
                             # 设置以utf-8解码模式读取文件，encoding参数必须设置，否则默认以gbk模式读取文件，当文件中包含中文时，会报错
                             temp = json.load(f)      #json格式数据转换为python字典类型
-                            mergeData["images"].extend(temp["images"])
-                            mergeData["categories"].extend(temp["categories"])
-                            mergeData["annotations"].extend(temp["annotations"])
+                            #mergeData["images"].extend(temp["images"])
+                            #mergeData["categories"].extend(temp["categories"])
+                            #mergeData["annotations"].extend(temp["annotations"])
+                            MergeCoco(mergeData["images"], temp["images"])
+                            MergeCoco(mergeData["categories"], temp["categories"])
+                            MergeCoco(mergeData["annotations"], temp["annotations"])
                 
 
                 with open(mergejson, "w") as outfile: 
