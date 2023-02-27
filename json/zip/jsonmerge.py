@@ -1,5 +1,6 @@
 import os
 import json
+from ruamel import yaml
 
 
 def MergeCoco(listTO, listFrom):
@@ -49,6 +50,41 @@ def Check(coco_list):
         if not os.path.isfile(mergejson):
             print("file {0} not exists".format(mergejson))
 
+def load_yaml(yaml_path):
+    config_dict = {}
+    with open(yaml_path, 'r', encoding='utf-8') as config_file:
+        config_dict = yaml.load(config_file.read(), Loader=yaml.RoundTripLoader)
+    return config_dict
+
+def save_yaml(yaml_path, config_dict):
+    with open(yaml_path, 'w', encoding='utf-8') as config_file:
+        yaml.dump(config_dict, config_file, Dumper=yaml.RoundTripDumper)
+
+
+def ModifyTrainYaml(coco_list):
+    yamlPath = '/data/gocpplua/python/json/zip/train_instance.yaml'
+    name = []
+    train = []
+    ann_json = []
+    img_root = []
+    for dir in coco_list:
+        dirname = os.path.basename(dir)
+        name.append(dirname)
+        train.append(dirname)
+        ann_json.append(os.path.join(dir, "merge.json"))
+        img_root.append(os.path.join(dir, "images"))
+
+    
+    data = load_yaml(yamlPath)
+    print(data['DATASET']['name'])
+    print(data['DATASET']['train'])
+    data['DATASET']['name'] = name
+    data['DATASET']['train'] = train
+    data['DATASET']['ann_json'] = ann_json
+    data['DATASET']['img_root'] = img_root
+    save_yaml(yamlPath, data)
+    return
+
 if __name__ == '__main__':
     file_path = "/data/gocpplua/python/json/zip"
     coco_list = []
@@ -59,5 +95,5 @@ if __name__ == '__main__':
 
     AnalysisJson(coco_list)
     Check(coco_list)
-
+    ModifyTrainYaml(coco_list)
 

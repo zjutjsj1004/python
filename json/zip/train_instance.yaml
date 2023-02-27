@@ -1,0 +1,32 @@
+DATASET:
+  name:
+  - view2
+  - view1
+  train:
+  - view2
+  - view1
+  eval: box_all_220927
+  ann_json:
+  - /data/gocpplua/python/json/zip/view2/merge.json
+  - /data/gocpplua/python/json/zip/view1/merge.json
+  img_root:
+  - /data/gocpplua/python/json/zip/view2/images
+  - /data/gocpplua/python/json/zip/view1/images
+
+OUT:
+  outroot: /data/InstanceSemantic
+  outdir: box_all_230223
+
+MODEL:
+  instance_model_cfg: ./instance_person/configs/mask_rcnn_R_50_FPN_3x.yaml
+  WEIGHTS: /data/InstanceSemantic/checkpoints/box_all_220927/model_final.pth
+  ROI_HEADS:
+    BATCH_SIZE_PER_IMAGE: 16
+    SCORE_THRESH_TEST: 0.5
+
+SOLVER:
+  MAX_ITER: 10000
+  IMS_PER_BATCH: 4
+  BASE_LR: 0.0005
+  CHECKPOINT_PERIOD: 500
+  resume: false
