@@ -1,0 +1,18 @@
+# SEMANTIC_THRESHOLD: 0.8
+DATASET:
+  NAME: incremental
+  MEAN: [0.485, 0.456, 0.406]
+  STD: [0.229, 0.224, 0.225]
+  CATEGORY: all      # NUM_CLASS{"indoor":10, "market":6, "outdoor":19, "all":30}
+  NUM_CLASS: 30
+  WORKERS: 8
+TEST:
+  HUMAN_MODEL_NAME: xxx
+  TEST_MODEL_PATH: runs/checkpoints/all_mix/jifang_20220808.pth.tar   # best_model_jifang_1011.pth.tar #
+    # RESIZE: 513  # long size
+
+MODEL:
+  MODEL_NAME: DeepLabV3_Plus
+  BACKBONE: resnet101
+
+HUMAN_MODEL_NAME: xxx

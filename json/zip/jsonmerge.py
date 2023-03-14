@@ -86,6 +86,10 @@ def ModifyTrainYaml(coco_list):
     return
 
 if __name__ == '__main__':
+    data = load_yaml('./cabinet_inference.yaml')
+    data['TEST']['HUMAN_MODEL_NAME'] = "xxx"
+    save_yaml('./cabinet_inference.yaml', data)
+
     file_path = "/data/gocpplua/python/json/zip"
     coco_list = []
     for root,dirs,files in os.walk(file_path):  # 遍历file_path下所有的子目录及文件
@@ -96,4 +100,6 @@ if __name__ == '__main__':
     AnalysisJson(coco_list)
     Check(coco_list)
     ModifyTrainYaml(coco_list)
+
+
 
