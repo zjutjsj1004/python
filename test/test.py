@@ -17,7 +17,7 @@ for idx in range(len(first_level_files)):
     if not update_kinect:
         if count != 0:
             filterSubpath += ','
-        filterSubpath += first_level_files_fullpath
+        filterSubpath += first_level_file
         count = count + 1
         continue
 
@@ -37,12 +37,12 @@ for idx in range(len(first_level_files)):
             if count != 0:
                 filterSubpath += ','
             find_second = True
-            filterSubpath += second_level_files_fullpath
+            filterSubpath += os.path.join(first_level_file, second_level_file)
             count = count + 1
     if not find_second:
         if count != 0:
             filterSubpath += ','
-        filterSubpath += first_level_files_fullpath
+        filterSubpath += first_level_file
         count = count + 1
 
 print (filterSubpath)
