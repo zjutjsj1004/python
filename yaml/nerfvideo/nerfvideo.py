@@ -33,20 +33,22 @@ for v in files:
         if isinstance(v, dict):
             if v.get("image", None):
                 img_name = v["image"]
-                if img_name.find("_0.") != -1 or img_name.find("_2.") != -1 or \
-                    img_name.find("_3.") != -1 or img_name.find("_4.") != -1 or \
-                    img_name.find("_5.") != -1:
-                    #v["image"] = img_name.replace("_1.", ".")
+                if img_name.find("_0.") == -1 and img_name.find("_2.") == -1 and \
+                    img_name.find("_3.") == -1 and img_name.find("_4.") == -1 and \
+                    img_name.find("_5.") == -1:
                     id = int(k.split("_")[-1])
                     ids.append(id)
 
     ids.sort()
+    pos_id = 0
     for id in ids:
         key = 'pose_' + str(id)
         # 获取文件所在目录和完整文件名
         dir_name, full_file_name = os.path.split(src[key]['image'])
         new_name = full_file_name.replace("_", "")
-        dest[key] = os.path.join(dir_name, new_name)
+        new_key = 'pose_' + str(pos_id)
+        dest[new_key] = src[key]
+        dest[new_key]['image'] = os.path.join(dir_name, new_name)
+        pos_id += 1
     dest['num_poses'] = len(ids)
-    print("========k==============")
-    print(dest)
+    save_yaml(filepath, dest)
