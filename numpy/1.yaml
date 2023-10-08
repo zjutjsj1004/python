@@ -1,0 +1,12 @@
+%YAML:1.0
+---
+transMatrix: !!opencv-matrix
+   rows: 3
+   cols: 4
+   dt: d
+   data: [ 1, 0,
+       0, 0,
+       0, 1,
+       0, 0,
+       0, 0,
+       1, 0 ]
