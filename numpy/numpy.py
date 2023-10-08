@@ -16,45 +16,59 @@ def load_yaml(yaml_path):
 addLine = numpy.array([0,0,0,1])
 
 
-targetlinesNed = []
+ned = []
 f = open('ned_to_ecef.txt', "r", encoding='utf-8')
 
 lines = f.readlines()
 f.close()
 
-if len(lines) == 3:
-    targetlinesNed.append(lines[0].rstrip().split(" "))
-    targetlinesNed.append(lines[1].rstrip().split(" "))
-    targetlinesNed.append(lines[2].rstrip().split(" "))
+if len(lines) != 3:
+    exit(0)
 
-targetlinesNed = numpy.matrix(targetlinesNed)
-
-targetlinesNedT = targetlinesNed.astype(numpy.float)
-
-Tn2e = numpy.r_[targetlinesNedT,[addLine]]
+ned.append(lines[0].rstrip().split(" "))
+ned.append(lines[1].rstrip().split(" "))
+ned.append(lines[2].rstrip().split(" "))
 
 
+ned = numpy.matrix(ned)
 
+nedT = ned.astype(numpy.float)
+
+Tn2e = numpy.r_[nedT,[addLine]]
+
+
+T1 = None
 data = load_yaml('./1.yaml')
 if data.get("transMatrix", None):
     transMatrix =   data["transMatrix"]  
     print(transMatrix)
     if transMatrix.get("data", None):
-            transMatrixData = transMatrix["data"]  
-            transMatrixDataT = numpy.array(transMatrixData).reshape(3,4)
-            print(transMatrixDataT)
+        transMatrixData = transMatrix["data"]  
+        transMatrixDataT = numpy.array(transMatrixData).reshape(3,4)
+        print(transMatrixDataT)
+        T1 = numpy.r_[transMatrixDataT,[addLine]]
+    else:
+        exit(0)
+else:
+     exit(0)
 
-T1 = numpy.r_[transMatrixDataT,[addLine]]
 
+rotT = numpy.matrix([-1,0,0,0, 0,0,1,0, 0,1,0,0, 0,0,0,1]).reshape(4,4)
 
-rotT = numpy.array([-1,0,0,0, 0,0,1,0, 0,1,0,0, 0,0,0,1]).reshape(4,4)
-
-print('-------- 4*4------------')
+print('-------- original data ------------')
 
 print("T1:", T1)
 print("Tn2e:", Tn2e)
 print("rotT:", rotT)
 
+print('-------- temporary data ------------')
+A = numpy.matrix(rotT * T1)
+print("rotT * T1:", A)
+
+
 print('-------- result------------')
-result = Tn2e * numpy.linalg.pinv(rotT * T1)
+result = Tn2e * A.I
+
+# result = Tn2e * numpy.linalg.pinv(rotT * T1)
+
 print(result)
