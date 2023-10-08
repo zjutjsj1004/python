@@ -1,6 +1,6 @@
 from ruamel import yaml
 import os
-import numpy
+import numpy as np
 
 
 def load_yaml(yaml_path):
@@ -13,7 +13,7 @@ def load_yaml(yaml_path):
                 return {}
     return config_dict
 
-addLine = numpy.array([0,0,0,1])
+addLine = np.array([0,0,0,1])
 
 
 ned = []
@@ -30,11 +30,11 @@ ned.append(lines[1].rstrip().split(" "))
 ned.append(lines[2].rstrip().split(" "))
 
 
-ned = numpy.matrix(ned)
+ned = np.matrix(ned)
 
-nedT = ned.astype(numpy.float)
+nedT = ned.astype(np.float)
 
-Tn2e = numpy.r_[nedT,[addLine]]
+Tn2e = np.r_[nedT,[addLine]]
 
 
 T1 = None
@@ -44,16 +44,16 @@ if data.get("transMatrix", None):
     print(transMatrix)
     if transMatrix.get("data", None):
         transMatrixData = transMatrix["data"]  
-        transMatrixDataT = numpy.array(transMatrixData).reshape(3,4)
+        transMatrixDataT = np.array(transMatrixData).reshape(3,4)
         print(transMatrixDataT)
-        T1 = numpy.r_[transMatrixDataT,[addLine]]
+        T1 = np.r_[transMatrixDataT,[addLine]]
     else:
         exit(0)
 else:
      exit(0)
 
 
-rotT = numpy.matrix([-1,0,0,0, 0,0,1,0, 0,1,0,0, 0,0,0,1]).reshape(4,4)
+rotT = np.matrix([-1,0,0,0, 0,0,1,0, 0,1,0,0, 0,0,0,1]).reshape(4,4)
 
 print('-------- original data ------------')
 
@@ -62,13 +62,22 @@ print("Tn2e:", Tn2e)
 print("rotT:", rotT)
 
 print('-------- temporary data ------------')
-A = numpy.matrix(rotT * T1)
+A = np.matrix(rotT * T1)
 print("rotT * T1:", A)
 
 
 print('-------- result------------')
 result = Tn2e * A.I
 
-# result = Tn2e * numpy.linalg.pinv(rotT * T1)
+# result = Tn2e * np.linalg.pinv(rotT * T1)
 
 print(result)
+
+print('-------- nedTransT------------')
+nedTransT = np.delete(result, 3, 0)
+print(nedTransT)
+
+
+print('-------- write trans_ned_to_ecef.txt------------')
+np.savetxt("trans_ned_to_ecef.txt", nedTransT,fmt='%f',delimiter=' ')
+
