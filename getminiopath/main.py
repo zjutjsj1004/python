@@ -30,7 +30,7 @@ txt_fh.close()
 for i in range(len(lines_list)):
     output_object_prefix = ''
     line = lines_list[i].replace('\n', '')
-    req = '10.219.41.11:98081/task-engine/v1/tasks/{0}'.format(line)
+    req = '10.211.41.84:48081/task-engine/v1/tasks/{0}'.format(line)
     cmd = "curl --location {0}".format(req)
 
     ret = popen_communicate_sys_cmd(cmd)
@@ -46,8 +46,9 @@ for i in range(len(lines_list)):
                 for k, v in parameter.items():
                     if v == 'output_object_prefix':
                         output_object_prefix = parameter['value']
-                        line_minio = "{0:40} {1}".format(line, output_object_prefix)
-                        print(line_minio)
+                        last_started_at = config_dict['task']['status']['last_started_at']
+                        line_minio = "{0:30} {1:40} {2}".format(last_started_at, line, output_object_prefix)
+                        print("{0:4}".format(i), line_minio)
                         lines_minio_list.append(line_minio)
                         break
         
@@ -62,6 +63,7 @@ for i in range(len(lines_list)):
 
     if i % 5 == 0:
         time.sleep(1)
+
 
 
 
