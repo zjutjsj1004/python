@@ -10,6 +10,23 @@ def save_yaml(yaml_path, config_dict):
     with open(yaml_path, 'w', encoding='utf-8') as config_file:
         yaml.dump(config_dict, config_file, Dumper=yaml.RoundTripDumper)
 
+def modify_tools_config(source_path, new_path, tasks, **kwargs):
+    config = load_yaml(source_path)
+    config["task_list"] = tasks.split(",")
+    for key, value in kwargs.items():
+        if key == "sfm_yaml_param" or key == "mvs_yaml_param":
+            if isinstance(value, list):
+                for i in range(len(value)):
+                    if isinstance(value[i], dict):
+                        for sk, sv in value[i].items():
+                            config[key][sk] = sv
+        else:
+            config[key] = value
+    save_yaml(new_path, config)
+
+modify_tools_config('./tools-config.yaml', './tools-config-new.yaml', "Ffmpeg", run_pano_update=False, nerf_video_duration=0, sfm_yaml_param=[{"detect_apriltag": 0 }], mvs_yaml_param=[{"a": 1}, {"b":2}])
+
+exit(0)  
 
 data = load_yaml('./tools-config.yaml')
 #data['mvs_yaml_param']['test'] = 1
