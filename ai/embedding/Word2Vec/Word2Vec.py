@@ -4,12 +4,17 @@
 
 from gensim.models import Word2Vec
 from nltk.tokenize import word_tokenize
+import numpy as np
+from sklearn.metrics.pairwise import cosine_similarity
+
 import nltk
 nltk.download('punkt', quiet=True)
 
 # 示例文本
 text = "这是一段文本，我想要生成它的嵌入。"
+# 分词和嵌入
 tokenized_text = word_tokenize(text.lower())
+
 
 # 训练Word2Vec模型
 model = Word2Vec([tokenized_text], vector_size=50, window=5, min_count=1, workers=4)
@@ -34,3 +39,34 @@ $ python3 Word2Vec.py
   -7.0199967e-05 -5.9236528e-04 -1.5322480e-02  1.9229483e-02
    9.9641131e-03  1.8466286e-02]]
 '''
+
+# 示例文本
+text1 = "这是一段文本，我想要生成它的嵌入。"
+text2 = "另一段文本，我希望获得它的嵌入。"
+
+# 分词和嵌入
+tokenized_text1 = word_tokenize(text1.lower())
+tokenized_text2 = word_tokenize(text2.lower())
+model = Word2Vec([tokenized_text1, tokenized_text2], vector_size=50, window=5, min_count=1, workers=4)
+# 提取文本嵌入
+embedding1 = model.wv[tokenized_text1]
+embedding2 = model.wv[tokenized_text2]
+
+# 方法1: 计算欧氏距离
+euclidean_distance = np.linalg.norm(embedding1 - embedding2)
+print(f"欧氏距离: {euclidean_distance}")
+
+# 欧氏距离: 0.11068378388881683
+
+
+# 方法2: 计算余弦相似度  pip3 install scikit-learn
+
+# 假设 embedding1 和 embedding2 是两个嵌入矩阵
+# 将嵌入矩阵降维为二维数组
+embedding1_flat = np.reshape(embedding1, (1, -1))
+embedding2_flat = np.reshape(embedding2, (1, -1))
+
+cosine_sim = cosine_similarity(embedding1_flat, embedding2_flat)
+cosine_distance = 1 - cosine_sim[0][0]
+print(f"余弦相似度: {cosine_distance}")
+# 余弦相似度: 0.9576270207762718
