@@ -1,3 +1,5 @@
+
+push_msg_url: http://localhost:8888
 task_list:
   - Task1
   - Task2

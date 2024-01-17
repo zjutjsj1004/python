@@ -6,7 +6,7 @@ class Task1(BaseTask):
 
     def pre_check(self):
         # Implement pre-check logic for Task1
-        print(self.config)
+        print("pre_check Task1")
         return True
 
     def exec(self):
