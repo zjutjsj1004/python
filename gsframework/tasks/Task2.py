@@ -1,9 +1,9 @@
-from BaseTask import BaseTask
+from tasks.BaseTask import BaseTask
 import os
 
 class Task2(BaseTask):
-    def __init__(self):
-        super(Task2, self).__init__()
+    def __init__(self, config_dict):
+        super(Task2, self).__init__(config_dict)
         
     def pre_check(self):
         # Implement pre-check logic for Task2

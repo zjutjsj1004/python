@@ -1,12 +1,12 @@
-from BaseTask import BaseTask
-import os
+from tasks.BaseTask import BaseTask
 
 class Task1(BaseTask):
-    def __init__(self):
-        super(Task1, self).__init__()
+    def __init__(self, config_dict):
+        super(Task1, self).__init__(config_dict)
 
     def pre_check(self):
         # Implement pre-check logic for Task1
+        print(self.config)
         return True
 
     def exec(self):

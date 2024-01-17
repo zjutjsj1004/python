@@ -1,8 +1,8 @@
 import yaml
-from BaseTask import BaseTask
-from Task1 import Task1
-from Task2 import Task2
-from Task3 import Task3
+from tasks.BaseTask import BaseTask
+from tasks.Task1 import Task1
+from tasks.Task2 import Task2
+from tasks.Task3 import Task3
 
 class SimpleFramework:
     def __init__(self):
@@ -29,15 +29,15 @@ class SimpleFramework:
 def load_config(file_path="config.yaml"):
     try:
         with open(file_path, "r") as file:
-            config = yaml.safe_load(file)
-        return config
+            config_dict = yaml.safe_load(file)
+        return config_dict
     except FileNotFoundError:
         print(f"Error: Configuration file '{file_path}' not found.")
     except yaml.YAMLError as e:
         print(f"Error parsing YAML in configuration file: {e}")
 
-def load_and_add_tasks1(framework, config):
-    task_list = config.get("task_list", [])
+def load_and_add_tasks1(framework, config_dict):
+    task_list = config_dict.get("task_list", [])
     for task_name in task_list:
         try:
             # Dynamically import the task module
@@ -55,8 +55,8 @@ def load_and_add_tasks1(framework, config):
         except (ImportError, AttributeError) as e:
             print(f"Error loading task {task_name}: {e}")
 
-def load_and_add_tasks(framework, config):
-    task_list = config.get("task_list", [])
+def load_and_add_tasks(framework, config_dict):
+    task_list = config_dict.get("task_list", [])
     for task_name in task_list:
         try:
             # Dynamically import the task module
@@ -64,7 +64,7 @@ def load_and_add_tasks(framework, config):
             print(task_module)
             if task_module:
                 # Get the task class directly (assuming the class name matches the file name)
-                    task_instance = globals()[task_name]()
+                    task_instance = globals()[task_name](config_dict)
 
                     # Create an instance of the task and add it to the framework
                     framework.add_task(task_instance)
@@ -77,14 +77,14 @@ def load_and_add_tasks(framework, config):
 
 if __name__ == "__main__":
     # 读取配置文件
-    config = load_config()
+    config_dict = load_config()
 
-    if config:
+    if config_dict:
         # 创建框架实例
         framework = SimpleFramework()
 
         # 根据配置添加任务并运行
-        load_and_add_tasks(framework, config)
+        load_and_add_tasks(framework, config_dict)
 
         # 运行任务
         framework.run_tasks()

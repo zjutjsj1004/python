@@ -1,5 +1,8 @@
-class BaseTask:
-    def __init__(self):
+from abc import ABC, abstractmethod
+
+class BaseTask(ABC):
+    def __init__(self,config_dict):
+        self.config = config_dict 
         pass
     
     def pre_check(self):
