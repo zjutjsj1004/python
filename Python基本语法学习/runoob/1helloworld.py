@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-print ("HGello World")
+print ("Hello World")
 
 
 if True:
