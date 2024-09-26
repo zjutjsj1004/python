@@ -19,12 +19,15 @@ def modify_tools_config(source_path, new_path, tasks, **kwargs):
                 for i in range(len(value)):
                     if isinstance(value[i], dict):
                         for sk, sv in value[i].items():
+                            print(sk, "=", sv)
+                            if config[key] is None:
+                                config[key] = {}
                             config[key][sk] = sv
         else:
             config[key] = value
     save_yaml(new_path, config)
 
-modify_tools_config('./tools-config.yaml', './tools-config-new.yaml', "Ffmpeg", run_pano_update=False, nerf_video_duration=0, sfm_yaml_param=[{"detect_apriltag": 0 }], mvs_yaml_param=[{"a": 1}, {"b":2}])
+modify_tools_config('./tools-config.yaml', './tools-config-new.yaml', "Ffmpeg", run_pano_update=False, nerf_video_duration=0, sfm_yaml_param=[{"multiple_models": 1 }], mvs_yaml_param=[{"a": 1}, {"b":2}])
 
 exit(0)  
 

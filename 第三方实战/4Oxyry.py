@@ -43,7 +43,7 @@ for key, value in files.items():
 
   data = {
   'append_source': False,
-  'preserve': "", # Blank, NQueens, Dancing Links, Classes, Module with __all__, Module without __all__, Function Arguments
+  'preserve': "Dancing Links", # Blank, NQueens, Dancing Links, Classes, Module with __all__, Module without __all__, Function Arguments
   'remove_docstrings': True,
   'rename_default_parameters': False,
   'rename_nondefault_parameters': True,
