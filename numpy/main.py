@@ -32,7 +32,7 @@ ned.append(lines[2].rstrip().split(" "))
 
 ned = np.matrix(ned)
 
-nedT = ned.astype(np.float)
+nedT = ned.astype(np.double)
 
 Tn2e = np.r_[nedT,[addLine]]
 
@@ -79,5 +79,5 @@ print(nedTransT)
 
 
 print('-------- write trans_ned_to_ecef.txt------------')
-np.savetxt("trans_ned_to_ecef.txt", nedTransT,fmt='%f',delimiter=' ')
+np.savetxt("trans_ned_to_ecef.txt", nedTransT,fmt='%.16f',delimiter=' ')
 
