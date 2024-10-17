@@ -38,14 +38,38 @@ data = {
     "messages": [
         {
             "role": "system",
-            "content": "作为一名助手，请使用英文回答用户的问题"
+            "content": "作为一名助手，请回答用户的问题"
         },
         {
             "role": "user",
             "content": "你是谁？"
+        },
+        {
+            "role": "assistant",
+            "content": "I am a chatbot."
         }
     ]
 }
+
+# 发送POST请求
+response = requests.post(url, headers=headers, json=data)
+
+# 打印响应内容
+print(response.status_code)
+print(response.json())
+
+
+# 请求数据(每次请求都是独立的，这里大模型无法拿到上下文)
+data = {
+    "model": "glm-4",
+    "messages": [
+        {
+            "role": "user",
+            "content": "我刚才问你什么问题"
+        }
+    ]
+}
+
 
 # 发送POST请求
 response = requests.post(url, headers=headers, json=data)
