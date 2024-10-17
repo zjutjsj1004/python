@@ -2,7 +2,7 @@ import time
 import jwt
 import requests
 # 你的API密钥
-api_key = '6dc6250f248ab34401d1e974424755b1.auuRSiYueq7Mvc6m'
+api_key = ''
 
 # 请求的URL
 url = 'https://open.bigmodel.cn/api/paas/v4/chat/completions'
