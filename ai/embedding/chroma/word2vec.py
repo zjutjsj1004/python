@@ -1,6 +1,6 @@
 import chroma # pip3 install chroma
 import numpy as np
-from gensim.models import Word2Vec
+from gensim.models import Word2Vec # pip3 install gensim
 
 # 步骤1：安装Chroma并导入所需的库
 
