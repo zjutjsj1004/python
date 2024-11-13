@@ -1,9 +1,15 @@
 import time
 import jwt
 import requests
-# 你的API密钥
-api_key = ''
+import os
+from dotenv import load_dotenv
 
+# 加载 .env 文件
+load_dotenv()
+
+# 你的API密钥
+api_key = os.getenv("ZHIPU_API_KEY")
+print(api_key)
 # 请求的URL
 url = 'https://open.bigmodel.cn/api/paas/v4/chat/completions'
 def generate_token(apikey: str, exp_seconds: int):
